@@ -5,7 +5,6 @@ os.environ['TK_LIBRARY'] = r'C:\Users\username\AppData\Local\Programs\Python\Pyt
 build_exe_options = {"packages": ["os"], "excludes": ["PyQt5"]}
 sys.argv.append("build")
 filename = "text.py" # Youre file name python 
-
 base = None
 if sys.platform == "win32":
     base = "Win32GUI"
