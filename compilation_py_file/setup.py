@@ -4,7 +4,7 @@ os.environ['TCL_LIBRARY'] = r'C:\Users\username\AppData\Local\Programs\Python\Py
 os.environ['TK_LIBRARY'] = r'C:\Users\username\AppData\Local\Programs\Python\Python36-32\tcl\tk8.6'
 build_exe_options = {"packages": ["os"], "excludes": ["PyQt5"]}
 sys.argv.append("build")
-filename = ""
+filename = "text.py" # Youre file name python 
 
 base = None
 if sys.platform == "win32":
