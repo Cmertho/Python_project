@@ -1,5 +1,6 @@
 from cx_Freeze import setup, Executable
 import os,sys
+# Youre file derictory python\tcl\tcl8.6 and python\tcl\tk8.6
 os.environ['TCL_LIBRARY'] = r'C:\Users\username\AppData\Local\Programs\Python\Python36-32\tcl\tcl8.6'
 os.environ['TK_LIBRARY'] = r'C:\Users\username\AppData\Local\Programs\Python\Python36-32\tcl\tk8.6'
 build_exe_options = {"packages": ["os"], "excludes": ["PyQt5"]}
