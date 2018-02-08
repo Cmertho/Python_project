@@ -146,7 +146,7 @@ class Time(QtWidgets.QWidget):
                 self.label_time.setText('До конца осталось %s : %s : %s' % (self.hours, self.minutes, self.seconds))
             else:
                 self.label_time.setText('До конца осталось %s : %s : %s' % (self.hours, self.minutes, self.seconds))
-        if int(self.minutes) <= 0:
+        if int(self.minutes) == -1:
             self.minutes = 59
             self.hours = int(self.hours) - 1
             if len(str(self.hours)) == 1:
