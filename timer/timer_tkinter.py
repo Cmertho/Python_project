@@ -33,7 +33,7 @@ class Main(tk.Tk):
             self.stop()
         else:
             self.label.config(text="Прошло времени: %02d : %02d : %02d" % (self.hours, self.minutes, self.second))
-            self.time = self.after(1, self.start)
+            self.time = self.after(1000, self.start)
 
     def stop(self):
         if self.time is not None:
