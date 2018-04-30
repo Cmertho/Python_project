@@ -7,7 +7,7 @@ class Times(QtWidgets.QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setWindowTitle("Timer")
-        self.hours, self.minutes, self.seconds, self.value_image = 0, 0, 5, 0
+        self.hours, self.minutes, self.seconds = 2, 0, 0
         self.setWindowTitle('Таймер обратного отсчета')
 
         self.label_time = QtWidgets.QLabel('%02d : %02d : %02d' % (self.hours, self.minutes, self.seconds))
