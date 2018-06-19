@@ -1,60 +1,61 @@
 import docx
-import collections
 import re
+import collections
 
-re_cap = re.compile("[\n]")
 
+class ReadDox(object):
+    construct, reconstruct, main_container = {}, [], []
 
-class Reconstruction(object):
-    def __init__(self):
-        self.construct, self.re_construct = {}, [""]
+    def read_file(self, doc):
 
-    def config(self, doc):
         document = docx.Document(doc)
+
         for para in document.paragraphs:
             for r in para.runs:
                 if r.font.bold:
-                    text = re_cap.sub(" ", r.text)
-                    if len(self.re_construct) > 3:
-                        self.configuration_text(self.re_construct)
-                        self.re_construct[0] = ''.join(self.re_construct[0] + text)
+                    if not self.reconstruct:
+                        self.reconstruct.append(re_cap.sub(" ", para.text))
                     else:
-                        self.re_construct[0] = ''.join(self.re_construct[0] + text)
+                        self.configuration_text(self.reconstruct)
+                        self.reconstruct.clear()
+                        self.reconstruct.append(re_cap.sub(" ", para.text))
 
                 elif r.font.italic:
-                    text = re_cap.sub(" ", r.text)
-                    self.re_construct.append(text)
-                    self.re_construct.append(text)
+                    text = re_cap.sub(" ", para.text)
+                    self.reconstruct.append(text)
+                    self.reconstruct.append(text)
                 else:
-                    text = re_cap.sub(" ", r.text)
-                    self.re_construct.append(text)
-
-                try:
-                    self.re_construct.remove(" ")
-                    self.re_construct.remove("")
-                except ValueError:
-                    pass
+                    text = re_cap.sub(" ", para.text)
+                    self.reconstruct.append(text)
+                break
         return self.construct
 
     def sort_dict(self, items):
-        col = [k for k, i in collections.Counter(items[1:]).items() if i > 1]
-        b = [j + 1 for j, z in enumerate(sorted(set(self.re_construct[1:]))) if z in col]
+        col = [k for k, i in collections.Counter(items).items() if i > 1]
+        b = [j + 1 for j, z in enumerate(sorted(set(self.reconstruct[1:]))) if z in col]
         return b if len(b) >= 2 else ", ".join(str(b[0]))
 
     def configuration_text(self, items):
         try:
             item = self.sort_dict(items)
-            items = sorted(set(items[1:]))
-            items.append(item)
-            items.insert(0, self.re_construct[0])
-            items.append(1 if len(item) == 1 else 2)
-            self.construct[len(self.construct) + 1] = [i for i in items]
-            self.re_construct.clear()
-            self.re_construct.append("")
-            return self.construct
+            items_text = sorted(set(items[1:]))
+            while len(items_text) < 5:
+                items_text.append("")
+            items_text.append(item)
+            items_text.insert(0, self.reconstruct[0])
+            items_text.append(1 if len(item) == 1 else 2)
+            self.construct[len(self.construct) + 1] = [i for i in items_text]
+            self.reconstruct.clear()
+            self.reconstruct.append("")
+            return 1
         except IndexError:
             return 0
 
 
-main = Reconstruction()
-print(main.config('name.docx')) # name .docx file
+re_cap = re.compile("[\n]")
+
+if __name__ == "__main__":
+    main = ReadDox()
+    a = main.read_file('test_component/tester.docx')
+    for i in a:
+        print(i, a[i])
