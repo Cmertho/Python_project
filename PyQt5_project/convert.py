@@ -20,7 +20,10 @@ class Calculate(object):
             elif i == "\t":
                 convert_english_text += '\t'
                 continue
-            convert_english_text += self.ENGLISH_CALCULATE[self.RUSSIAN_CALCULATE.index(i)]
+            try:
+                convert_english_text += self.ENGLISH_CALCULATE[self.RUSSIAN_CALCULATE.index(i)]
+            except ValueError:
+                return self.convert_english_to_russian(text)
         return convert_english_text
 
     def convert_english_to_russian(self, text):
@@ -47,12 +50,13 @@ class Main(QtWidgets.QWidget):
 
     def initUI(self):
         self.setStyleSheet("font-size:20px;")
-        label_rus = QtWidgets.QLabel("Вводимые русские символы")
+        label_rus = QtWidgets.QLabel("Конвертировать текст")
         self.line_russian_text = QtWidgets.QPlainTextEdit()
-        label_eng = QtWidgets.QLabel("Enter english characters")
+        label_eng = QtWidgets.QLabel("Конвертированный текст")
         self.line_english_text = QtWidgets.QPlainTextEdit()
         button = QtWidgets.QPushButton("Конвертировать")
-        button.clicked.connect(self.convert_text)
+        button.clicked.connect(lambda: self.line_english_text.setPlainText(self.convert.convert_russian_to_english(
+            self.line_russian_text.toPlainText())))
         button_clear = QtWidgets.QPushButton("Стереть")
         button_clear.clicked.connect(lambda: self.line_russian_text.clear())
         button_clear.clicked.connect(lambda: self.line_english_text.clear())
@@ -64,15 +68,6 @@ class Main(QtWidgets.QWidget):
         layout.addWidget(button)
         layout.addWidget(button_clear)
         self.setLayout(layout)
-
-    def convert_text(self):
-        if not self.line_english_text.toPlainText():
-            self.line_english_text.setPlainText(self.convert.convert_russian_to_english(
-                self.line_russian_text.toPlainText()))
-            return self.line_russian_text.clear()
-        self.line_russian_text.setPlainText(self.convert.convert_english_to_russian(
-            self.line_english_text.toPlainText()))
-        return self.line_english_text.clear()
 
 
 if __name__ == "__main__":
