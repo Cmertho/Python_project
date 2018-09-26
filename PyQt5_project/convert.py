@@ -23,7 +23,7 @@ class Calculate(object):
             try:
                 convert_english_text += self.ENGLISH_CALCULATE[self.RUSSIAN_CALCULATE.index(i)]
             except ValueError:
-                return self.convert_english_to_russian(text)
+                convert_english_text = self.convert_english_to_russian(text)
         return convert_english_text
 
     def convert_english_to_russian(self, text):
