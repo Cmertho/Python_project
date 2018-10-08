@@ -32,6 +32,32 @@ class Main(QtWidgets.QListWidget):
                  color: #000;
             }
         """)
+        
+        # sky color
+        """
+            QListWidget{
+                border: 0px;
+                background: #F0F0F0;
+                font-size: 20px;
+                font-family: Times New Roman;
+                padding: 5px;
+            }
+            QListWidget::item {
+                background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
+                                            stop: 0 #5af, stop: 1 #fff);
+                border-style: outset;
+                border-radius: 10px;
+                border-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
+                                            stop: 0 #5af, stop: 1 #fff);
+                font: bold 14px;
+                min-width: 10em;
+                padding: 6px;
+            }
+            QListWidget::item:selected {
+                 border: 1px solid #6a6ea9;
+                 color: #000;
+            }
+        """
 
 
 if __name__ == "__main__":
