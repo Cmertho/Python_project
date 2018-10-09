@@ -85,8 +85,7 @@ class ListWidget(QtWidgets.QListWidget):
             self.addItems(list_dir)
 
         elif os.path.isfile(file_name):
-            # os.startfile(file_name)
-            pass
+            os.startfile(file_name)
         self.label.emit()
 
 
