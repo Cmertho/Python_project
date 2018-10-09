@@ -5,7 +5,6 @@ from PyQt5 import QtWidgets, QtCore
 __author__ = "Twiss"
 
 
-
 class ListWidget(QtWidgets.QListWidget):
     label = QtCore.pyqtSignal()
 
@@ -101,9 +100,7 @@ class Panel(QtWidgets.QWidget):
             }
         """)
         self.list_widget = ListWidget()
-        self.list_widget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
-        self.list_widget.customContextMenuRequested.connect(self.p)
-
+        
         self.label = QtWidgets.QLabel(os.getcwd())
         self.list_widget.label.connect(lambda: self.label.setText(os.getcwd()))
 
@@ -112,11 +109,7 @@ class Panel(QtWidgets.QWidget):
         layout.addWidget(self.list_widget)
         self.setLayout(layout)
 
-    def p(self, n):
-        if self.list_widget.itemAt(n):
-            print("widget")
-
-
+ 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     main = Panel()
