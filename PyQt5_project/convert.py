@@ -9,8 +9,10 @@ class Calculate(object):
     1234567890-=\Ё!"№;%:?*()_+/"""
 
     def convert_russian_to_english(self, text):
+
         convert_english_text = ''
         for i in text:
+
             if i == " ":
                 convert_english_text += " "
                 continue
@@ -28,6 +30,7 @@ class Calculate(object):
 
     def convert_english_to_russian(self, text):
         convert_russian_text = ""
+
         for i in text:
             if i == " ":
                 convert_russian_text += " "
@@ -38,24 +41,24 @@ class Calculate(object):
             elif i == "\t":
                 convert_russian_text += '\t'
                 continue
-            convert_russian_text += self.RUSSIAN_CALCULATE[self.ENGLISH_CALCULATE.index(i)]
+            convert_russian_text += self.RUSSIAN_CALCULATE[self.ENGLISH_CALCULATE.find(i)]
+
         return convert_russian_text
 
 
-class Main(QtWidgets.QWidget):
+class Main(QtWidgets.QWidget, Calculate):
     def __init__(self):
-        super().__init__()
-        self.convert = Calculate()
-        self.initUI()
+        super(Main, self).__init__()
+        self.ui()
 
-    def initUI(self):
+    def ui(self):
         self.setStyleSheet("font-size:20px;")
         label_rus = QtWidgets.QLabel("Конвертировать текст")
         self.line_russian_text = QtWidgets.QPlainTextEdit()
         label_eng = QtWidgets.QLabel("Конвертированный текст")
         self.line_english_text = QtWidgets.QPlainTextEdit()
         button = QtWidgets.QPushButton("Конвертировать")
-        button.clicked.connect(lambda: self.line_english_text.setPlainText(self.convert.convert_russian_to_english(
+        button.clicked.connect(lambda: self.line_english_text.setPlainText(self.convert_russian_to_english(
             self.line_russian_text.toPlainText())))
         button_clear = QtWidgets.QPushButton("Стереть")
         button_clear.clicked.connect(lambda: self.line_russian_text.clear())
@@ -68,6 +71,9 @@ class Main(QtWidgets.QWidget):
         layout.addWidget(button)
         layout.addWidget(button_clear)
         self.setLayout(layout)
+
+    def convert_russian_to_english(self, text):
+        return super().convert_russian_to_english(text)
 
 
 if __name__ == "__main__":
