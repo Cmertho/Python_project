@@ -66,7 +66,11 @@ class ListWidget(QtWidgets.QListWidget):
 
             if file_start == "...":
                 file_dir = os.getcwd().split("\\")
-                os.chdir("\\".join(file_dir[:-1]))
+                del file_dir[-1]
+                if len(file_dir) == 1:
+                    os.chdir(f"{file_dir[0]}\\")
+                else:
+                    os.chdir("\\".join(file_dir))
                 list_dir = os.listdir(os.getcwd())
 
             elif os.path.isdir(file_name):
