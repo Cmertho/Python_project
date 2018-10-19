@@ -1,0 +1,18 @@
+{
+    "button": [
+        "Times New Roman",
+        20
+    ],
+    "times": [
+        "Times New Roman",
+        100
+    ],
+    "label": [
+        "Times New Roman",
+        20
+    ],
+    "size": [
+        640,
+        480
+    ]
+}
