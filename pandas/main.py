@@ -14,7 +14,7 @@ for i in a.split():
         frame["date"].append(i)
     elif re.findall("(\d{2}:\d{2}:\d{2})", i):
         frame["time"].append(i)
-    elif re.findall("(\d{2}|\d{1})", i):
+    elif re.findall("(\d)", i):
         frame["id"].append(i)
 
 df = pd.DataFrame(frame)
