@@ -2,22 +2,21 @@ import re
 import pandas as pd
 with open("all.txt", "r") as file:
     a = file.read()
-time = []
-date = []
-id_name = []
-for i in a.split():
-    if re.findall("(\d{4}-\d{2}-\d{2})", i):
-        date.append(i)
-    elif re.findall("(\d{2}:\d{2}:\d{2})", i):
-        time.append(i)
-    elif re.findall("(\d{2}|\d{1})", i):
-        id_name.append(i)
+    
 frame = {
-    "id": id_name,
-    "time": time,
-    "date": date
+    "id": [],
+    "time": [],
+    "date": []
 
 }
+for i in a.split():
+    if re.findall("(\d{4}-\d{2}-\d{2})", i):
+        frame["date"].append(i)
+    elif re.findall("(\d{2}:\d{2}:\d{2})", i):
+        frame["time"].append(i)
+    elif re.findall("(\d{2}|\d{1})", i):
+        frame["id"].append(i)
+
 df = pd.DataFrame(frame)
 df['datetime'] = pd.to_datetime(df['time'] + ' ' + df['date'])
 df["date"] = df["date"].apply(pd.to_datetime)
