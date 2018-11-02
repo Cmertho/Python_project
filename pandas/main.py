@@ -21,7 +21,7 @@ frame = {
 df = pd.DataFrame(frame)
 df['datetime'] = pd.to_datetime(df['time'] + ' ' + df['date'])
 df["date"] = df["date"].apply(pd.to_datetime)
-print(df[(df.datetime <= "22.06.2018 17:00") & (df.datetime >= "22.06.2018 16:00")])
+print(df[(df.datetime >= "22.06.2018 16:00") & (df.datetime <= "22.06.2018 17:00")])
 
 #    id      time       date            datetime
 #     4  16:19:10 2018-06-22 2018-06-22 16:19:10
