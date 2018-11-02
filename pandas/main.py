@@ -19,7 +19,6 @@ for i in a.split():
 
 df = pd.DataFrame(frame)
 df['datetime'] = pd.to_datetime(df['time'] + ' ' + df['date'])
-df["date"] = df["date"].apply(pd.to_datetime)
 print(df[(df.datetime >= "22.06.2018 16:00") & (df.datetime <= "22.06.2018 17:00")])
 
 #    id      time       date            datetime
