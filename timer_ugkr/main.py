@@ -83,7 +83,7 @@ class Timer(QtWidgets.QWidget):
         size_1024_768 = windows_size.addAction("1024x768")
         size_1024_768.triggered.connect(lambda: self.custom_size(0, 1024, 768))
         size_any = windows_size.addAction("Кастомное расширение")
-        size_any.triggered.connect(self.custom_size)
+        size_any.triggered.connect(lambda: self.custom_size(1))
 
         with open("setting.json", encoding="utf-8") as file:
             settings = json.loads(file.read())
